@@ -39,9 +39,9 @@ void end_file(void)
 int main(void)
 {
 	char **argv, *token, *mes = NULL;
-	size_t line, len = 0;
+	size_t len = 0;
 	pid_t child_pid;
-	int status, i = 0;
+	int status, line, i = 0;
 
 	while (1)
 	{
