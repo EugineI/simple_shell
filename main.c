@@ -1,36 +1,4 @@
-#include<stdio.h>
 #include"shell.h"
-#include<string.h>
-#include<stdlib.h>
-#include<unistd.h>
-#include<sys/types.h>
-#include<sys/wait.h>
-
-/**
- * exit_shell - name
- * @argv: argument vector
- * @mes: line message
- * Return: nothing
- */
-void exit_shell(char **argv, char *mes)
-{
-	free(argv);
-	free(mes);
-	exit(0);
-}
-/**
- * end_file - name
- * Return: nothing
- */
-void end_file(void)
-{
-	if (feof(stdin))
-	{
-		write(1, "\n", 1);
-		exit(0);
-	}
-	perror("./shell");
-}
 /**
  * main - entry point
  * Description: simple shell, takes no arguments
@@ -45,7 +13,7 @@ int main(void)
 
 	while (1)
 	{
-		write(1, "#cisfun$ ", 9);
+		write(1, "($) ", 4);
 		line = getline(&mes, &len, stdin);
 		if (line == -1)
 			end_file();
