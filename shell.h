@@ -7,7 +7,9 @@
 #include<sys/types.h>
 #include<sys/wait.h>
 
-extern const char **environ;
+extern char **environ;
 void exit_shell(char **argv, char *mes);
 void end_file(void);
+void print_error(char *pro_name, char *command);
+void shell_env(void);
 #endif

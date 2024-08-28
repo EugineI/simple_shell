@@ -22,5 +22,20 @@ void end_file(void)
 		write(1, "\n", 1);
 		exit(0);
 	}
-	perror("./shell");
+}
+/**
+ * print_error - name
+ * @pro_name
+ * @command
+ * Return: Nothing
+ */
+void print_error(char *pro_name, char *command)
+{
+	char *message = ": 1: ";
+	char *not_found = ": not found\n";
+
+	write(2, pro_name, strlen(pro_name));
+	write(2, message, strlen(message));
+	write(2, command, strlen(command));
+	write(2, not_found, strlen(not_found));
 }

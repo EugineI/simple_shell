@@ -1,19 +1,22 @@
 #include"shell.h"
 /**
  * main - entry point
+ * @argc: count
+ * @av: vector
  * Description: simple shell, takes no arguments
  * Return: 0
  */
-int main(void)
+int main(int ac, char **av)
 {
 	char **argv, *token, *mes = NULL;
 	size_t len = 0;
 	pid_t child_pid;
 	int status, line, i = 0;
 
+	(void)ac;
 	while (1)
 	{
-		write(1, "($) ", 4);
+		write(1, "# ", 4);
 		line = getline(&mes, &len, stdin);
 		if (line == -1)
 			end_file();
@@ -29,18 +32,19 @@ int main(void)
 			argv[i] = token;
 			token = strtok(NULL, "\t| \n");
 			i++;
-		}
-		argv[i] = NULL;
-		child_pid = fork();
+		} argv[i] = NULL;
+		if (argv[0] != NULL && strcmp(argv[0], "env") == 0)
+		{
+			shell_env();
+			continue;
+		} child_pid = fork();
 		if (child_pid == 0)
 		{
 			if (execve(argv[0], argv, (char *const *)environ) == -1)
-				perror("./shell");
+				print_error(av[0], argv[0]);
 			exit(EXIT_FAILURE);
 		} else if (child_pid > 0)
 			wait(&status);
-		else
-			perror("./shell");
 		free(argv);
 	} free(mes);
 	return (0);
