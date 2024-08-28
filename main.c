@@ -35,12 +35,12 @@ int main(void)
 		if (child_pid == 0)
 		{
 			if (execve(argv[0], argv, (char *const *)environ) == -1)
-				perror("./shell: ");
+				perror("./shell");
 			exit(EXIT_FAILURE);
 		} else if (child_pid > 0)
 			wait(&status);
 		else
-			perror("./shell: ");
+			perror("./shell");
 		free(argv);
 	} free(mes);
 	return (0);
