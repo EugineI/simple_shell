@@ -7,9 +7,9 @@
  */
 void exit_shell(char **argv, char *mes)
 {
-        free(argv);
-        free(mes);
-        exit(0);
+	free(argv);
+	free(mes);
+	exit(0);
 }
 /**
  * end_file - name
@@ -17,10 +17,10 @@ void exit_shell(char **argv, char *mes)
  */
 void end_file(void)
 {
-        if (feof(stdin))
-        {
-                write(1, "\n", 1);
-                exit(0);
-        }
-        perror("./shell");
+	if (feof(stdin))
+	{
+		write(1, "\n", 1);
+		exit(0);
+	}
+	perror("./shell");
 }
