@@ -13,7 +13,7 @@ int main(void)
 
 	while (1)
 	{
-		write(1, "#cisfun$ ", 9);
+		write(1, "($) ", 4);
 		line = getline(&mes, &len, stdin);
 		if (line == -1)
 			end_file();
