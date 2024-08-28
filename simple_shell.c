@@ -1,7 +1,7 @@
 #include"shell.h"
 /**
  * main - entry point
- * @argc: count
+ * @ac: count
  * @av: vector
  * Description: simple shell, takes no arguments
  * Return: 0

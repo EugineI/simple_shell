@@ -25,8 +25,8 @@ void end_file(void)
 }
 /**
  * print_error - name
- * @pro_name
- * @command
+ * @pro_name: program name
+ * @command: command
  * Return: Nothing
  */
 void print_error(char *pro_name, char *command)
