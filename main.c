@@ -16,7 +16,7 @@ int main(int ac, char **av)
 	(void)ac;
 	while (1)
 	{
-		write(1, "# ", 4);
+		write(1, "$ ", 4);
 		line = getline(&mes, &len, stdin);
 		if (line == -1)
 			end_file();
