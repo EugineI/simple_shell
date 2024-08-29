@@ -11,7 +11,7 @@ int main(int ac, char **av)
 	char **argv, *token, *mes = NULL;
 	size_t len = 0;
 	pid_t child_pid;
-	int status, line, i = 0;
+	int status, line, i;
 
 	(void)ac;
 	while (1)
@@ -20,7 +20,7 @@ int main(int ac, char **av)
 		line = getline(&mes, &len, stdin);
 		if (line == -1)
 			end_file();
-		else if (line == 1)
+		if (line == 1)
 			continue;
 		argv = malloc(sizeof(char *) * 1024);
 		if (argv == NULL)
@@ -35,12 +35,13 @@ int main(int ac, char **av)
 			if (strcmp(token, "exit") == 0)
 				exit_shell(argv, mes);
 			argv[i] = token;
-			token = strtok(NULL, "\t| \n");
+			token = strtok(NULL, " \t\n");
 			i++;
 		} argv[i] = NULL;
 		if (argv[0] != NULL && strcmp(argv[0], "env") == 0)
 		{
 			shell_env();
+			free(argv);
 			continue;
 		} child_pid = fork();
 		if (child_pid == 0)
