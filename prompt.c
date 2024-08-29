@@ -5,6 +5,11 @@
  */
 void prompt()
 {
-	char prompt[] = "#cisfun ";
-	write(1, prompt, strlen(prompt));
+	char *prompt;
+
+	if (isatty(0))
+	{
+		prompt = "#cisfun ";
+		write(1, prompt, strlen(prompt));
+	}
 }

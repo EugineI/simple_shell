@@ -15,10 +15,10 @@ void exit_shell(char **argv, char *mes)
  * end_file - name
  * Return: nothing
  */
-void end_file(void)
+void end_file(char *mes)
 {
-	if (feof(stdin))
 	{
+		free(mes);
 		exit(0);
 	}
 }
