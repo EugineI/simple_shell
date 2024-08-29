@@ -22,9 +22,14 @@ int main(int ac, char **av)
 			end_file();
 		else if (line == 1)
 			continue;
-		token = strtok(mes, " \t|\n");
 		argv = malloc(sizeof(char *) * 1024);
+		if (argv == NULL)
+		{
+			perror("malloc");
+			continue;
+		}
 		i = 0;
+		token = strtok(mes, " \t\n");
 		while (token != NULL)
 		{
 			if (strcmp(token, "exit") == 0)
@@ -41,8 +46,10 @@ int main(int ac, char **av)
 		if (child_pid == 0)
 		{
 			if (execve(argv[0], argv, (char *const *)environ) == -1)
+			{
 				print_error(av[0], argv[0]);
-			exit(EXIT_FAILURE);
+				exit_shell(argv, mes);
+			} exit(EXIT_FAILURE);
 		} else if (child_pid > 0)
 			wait(&status);
 		free(argv);
