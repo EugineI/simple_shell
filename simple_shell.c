@@ -20,7 +20,7 @@ int main(int ac, char **av)
 		line = getline(&mes, &len, stdin);
 		if (line == -1)
 			end_file();
-		if (line == 1)
+		if (line <= 1)
 			continue;
 		argv = malloc(sizeof(char *) * 1024);
 		if (argv == NULL)
