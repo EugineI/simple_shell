@@ -19,7 +19,6 @@ void end_file(void)
 {
 	if (feof(stdin))
 	{
-		write(1, "\n", 1);
 		exit(0);
 	}
 }

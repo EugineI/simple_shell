@@ -7,9 +7,11 @@
 #include<sys/types.h>
 #include<sys/wait.h>
 
+#define BUFFER_SIZE 1024;
 extern char **environ;
 void exit_shell(char **argv, char *mes);
 void end_file(void);
 void print_error(char *pro_name, char *command);
 void shell_env(void);
+void prompt(void);
 #endif
