@@ -13,17 +13,20 @@ int main(int ac, char **av)
 	ssize_t line;
 	pid_t child_pid;
 	int status, i;
+	int interactive = isatty(STDIN_FILENO);
 
 	(void)ac;
 	while (1)
 	{
-		prompt();
+		if (interactive)
+		{
+			prompt();
+		}
 		line = getline(&mes, &len, stdin);
 		if (line == -1)
 		{
 			if (errno == 0 || errno == EINVAL || errno == EBADF)
 				end_file(mes);
-			perror("getline");
 			free(mes);
 			exit(EXIT_FAILURE);
 		}
