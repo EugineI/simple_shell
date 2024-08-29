@@ -13,5 +13,8 @@ void exit_shell(char **argv, char *mes);
 void end_file(char *mes);
 void print_error(char *pro_name, char *command);
 void shell_env(void);
+void execute_command(char **argv, char **av);
+char **token_input(char *mes);
 void prompt(void);
+int built_in(char **argv, char *mes);
 #endif

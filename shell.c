@@ -13,6 +13,7 @@ void exit_shell(char **argv, char *mes)
 }
 /**
  * end_file - name
+ * @mes: mes
  * Return: nothing
  */
 void end_file(char *mes)
@@ -37,4 +38,31 @@ void print_error(char *pro_name, char *command)
 	write(2, message, strlen(message));
 	write(2, command, strlen(command));
 	write(2, not_found, strlen(not_found));
+}
+/**
+ * token_input - tokenises input
+ * @mes: argument
+ * Return: argv
+ */
+char **token_input(char *mes)
+{
+	char **argv;
+	char *token;
+	int i = 0;
+
+	argv = malloc(sizeof(char *) * 1024);
+	if (argv == NULL)
+	{
+		perror("malloc");
+		return (NULL);
+	}
+	token = strtok(mes, " \t\n");
+	while (token != NULL)
+	{
+		argv[i] = token;
+		token = strtok(NULL, " \t\n");
+		i++;
+	}
+	argv[i] = NULL;
+	return (argv);
 }
