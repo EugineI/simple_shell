@@ -9,8 +9,8 @@
 int main(int ac, char **av)
 {
 	char **argv, *mes = NULL;
-	size_t len = 0;
 	ssize_t line;
+	size_t len = 0;
 
 	(void)ac;
 	while (1)
@@ -26,8 +26,10 @@ int main(int ac, char **av)
 				end_file(mes);
 			free(mes);
 			exit(EXIT_FAILURE);
-		} else if (line <= 1)
+		}
+		else if (line <= 1)
 			continue;
+		rem_newline(mes, len);
 		argv = token_input(mes);
 		if (argv == NULL)
 			continue;
