@@ -9,7 +9,7 @@ void prompt(void)
 
 	if (isatty(0))
 	{
-		prompt = "#cisfun ";
+		prompt = "($) ";
 		write(1, prompt, strlen(prompt));
 	}
 }
