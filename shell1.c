@@ -35,7 +35,7 @@ void execute_command(char **argv, char **av)
 		if (execve(argv[0], argv, (char *const *)environ) == -1)
 		{
 			print_error(av[0], argv[0]);
-			exit(EXIT_FAILURE);
+			_exit(EXIT_FAILURE);
 		}
 	}
 	else
