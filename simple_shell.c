@@ -22,10 +22,17 @@ int main(int ac, char **av)
 		line = getline(&mes, &len, stdin);
 		if (line == -1)
 		{
-			if (errno == 0 || errno == EINVAL || errno == EBADF)
-				end_file(mes);
-			free(mes);
-			exit(0);
+			if(feof(stdin))
+			{
+				free(mes);
+				exit(0);
+			}
+			else
+			{
+				free(mes);
+				perror("getline");
+				exit(1);
+			}
 		}
 		else if (line <= 1)
 			continue;
