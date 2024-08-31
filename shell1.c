@@ -21,13 +21,30 @@ void prompt(void)
  */
 void execute_command(char **argv, char **av)
 {
-	pid_t child_pid = fork();
+	pid_t child_pid;
 	int status;
+	char *com_path;
 
+	if (strchr(argv[0], '/') == NULL)
+	{
+		com_path = command_path(argv[0]);
+		if (com_path == NULL)
+		{
+			print_error(av[0], argv[0]);
+			return;
+		}
+		argv[0] = com_path;
+	}
+	else
+	{
+		com_path = argv[0];
+	}
+	child_pid = fork();
 	if (child_pid == -1)
 	{
 		perror("fork");
-		free(argv);
+		if (com_path != argv[0])
+			free(com_path);
 		return;
 	}
 	else if (child_pid == 0)
@@ -39,7 +56,52 @@ void execute_command(char **argv, char **av)
 		}
 	}
 	else
-		wait(&status);
+	{
+		waitpid(child_pid, &status, 0);
+	}
+	if (com_path != argv[0])
+		free(com_path);
+}
+/**
+ * command_path - name
+ * @mes: command
+ * Return: Null
+ */
+char *command_path(const char *mes)
+{
+	char *path_env, *path, *dir, *full;
+	size_t len;
+	struct stat st;
+
+	path_env = getenv("PATH");
+	if (path_env == NULL)
+		return (NULL);
+	path = strdup(path_env);
+	if (path == NULL)
+		return (NULL);
+	dir = strtok(path, " :\t\n");
+	while (dir != NULL)
+	{
+		len = strlen(dir) + strlen(mes) + 2;
+		full = malloc(len);
+		if (full == NULL)
+		{
+			free(path);
+			return (NULL);
+		}
+		strcpy(full, dir);
+		strcat(full, "/");
+		strcat(full, mes);
+		if (stat(full, &st) == 0 && S_ISREG(st.st_mode) && (st.st_mode & S_IXUSR))
+		{
+			free(path);
+			return (full);
+		}
+		free(full);
+		dir = strtok(NULL, ":");
+	}
+	free(path);
+	return (NULL);
 }
 /**
  * built_in - handles built ins

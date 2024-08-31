@@ -6,6 +6,7 @@
 #include<stdlib.h>
 #include<sys/types.h>
 #include<sys/wait.h>
+#include<sys/stat.h>
 #include<errno.h>
 #define BUFFER_SIZE 1024
 extern char **environ;
@@ -18,4 +19,5 @@ void execute_command(char **argv, char **av);
 char **token_input(char *mes);
 void prompt(void);
 int built_in(char **argv, char *mes);
+char *command_path(const char *mes);
 #endif

@@ -8,7 +8,7 @@
  */
 int main(int ac, char **av)
 {
-	char **argv, *mes = NULL;
+	char **argv = NULL, *mes = NULL;
 	ssize_t line;
 	size_t len = 0;
 
@@ -18,24 +18,23 @@ int main(int ac, char **av)
 		if (isatty(STDIN_FILENO))
 		{
 			prompt();
-		}
-		line = getline(&mes, &len, stdin);
+		} line = getline(&mes, &len, stdin);
 		if (line == -1)
 		{
-			if(feof(stdin))
+			if (feof(stdin))
 			{
 				free(mes);
-				exit(0);
-			}
-			else
+				exit(EXIT_SUCCESS);
+			} else
 			{
-				free(mes);
 				perror("getline");
-				exit(1);
-			}
-		}
-		else if (line <= 1)
+				free(mes);
+				exit(EXIT_FAILURE);
+			} }
+		if (line <= 1)
+		{
 			continue;
+		}
 		rem_newline(mes, len);
 		argv = token_input(mes);
 		if (argv == NULL)
@@ -44,8 +43,7 @@ int main(int ac, char **av)
 		{
 			free(argv);
 			continue;
-		}
-		execute_command(argv, av);
+		} execute_command(argv, av);
 		free(argv);
 	} free(mes);
 	return (0);
