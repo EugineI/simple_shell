@@ -25,7 +25,7 @@ int main(int ac, char **av)
 			if (errno == 0 || errno == EINVAL || errno == EBADF)
 				end_file(mes);
 			free(mes);
-			exit(EXIT_FAILURE);
+			exit(0);
 		}
 		else if (line <= 1)
 			continue;
