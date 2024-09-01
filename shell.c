@@ -9,7 +9,7 @@ void exit_shell(char **argv, char *mes)
 {
 	free(argv);
 	free(mes);
-	exit(2);
+	exit(0);
 }
 /**
  * end_file - name
