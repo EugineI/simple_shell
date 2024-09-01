@@ -7,9 +7,15 @@
  */
 void exit_shell(char **argv, char *mes)
 {
+	int status = 0;
+
+	if (argv[1] != NULL)
+	{
+		status = atoi(argv[1]);
+	}
 	free(argv);
 	free(mes);
-	exit(2);
+	exit(status);
 }
 /**
  * end_file - name
@@ -19,6 +25,7 @@ void exit_shell(char **argv, char *mes)
 void end_file(char *mes)
 {
 	{
+	
 		free(mes);
 		exit(0);
 	}
