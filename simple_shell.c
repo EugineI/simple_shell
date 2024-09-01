@@ -35,11 +35,12 @@ int main(int ac, char **av)
 		{
 			continue;
 		}
-		rem_newline(mes, len);
+		rem_newline(mes, line);
 		argv = token_input(mes);
 		if (argv == NULL)
+		{
 			continue;
-		if (built_in(argv, mes))
+		} if (built_in(argv, mes))
 		{
 			free(argv);
 			continue;
