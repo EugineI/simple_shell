@@ -43,7 +43,6 @@ void execute_command(char **argv, char **av)
 	if (child_pid == -1)
 	{
 		perror("fork");
-		exit(EXIT_FAILURE);
 		if (com_path != argv[0])
 			free(com_path);
 		return;
