@@ -15,16 +15,13 @@ int main(int ac, char **av)
 	(void)ac;
 	while (1)
 	{
-		if (isatty(STDIN_FILENO))
-		{
-			prompt();
-		} line = getline(&mes, &len, stdin);
+		prompt();
+		line = getline(&mes, &len, stdin);
 		if (line == -1)
 		{
 			if (feof(stdin))
 			{
-				free(mes);
-				exit(EXIT_SUCCESS);
+				end_file(mes);
 			} else
 			{
 				perror("getline");
@@ -34,13 +31,15 @@ int main(int ac, char **av)
 		if (line <= 1)
 		{
 			continue;
-		}
-		rem_newline(mes, line);
+		} rem_newline(mes, line);
 		argv = token_input(mes);
-		if (argv == NULL)
+		if (argv == NULL || argv[0] == NULL)
 		{
+			if (argv != NULL)
+				free(argv);
 			continue;
-		} if (built_in(argv, mes))
+		}
+		if (built_in(argv, mes))
 		{
 			free(argv);
 			continue;
