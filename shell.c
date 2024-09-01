@@ -5,13 +5,18 @@
  * @mes: line message
  * Return: nothing
  */
+int last_status = 0;
 void exit_shell(char **argv, char *mes)
 {
-	int status = 0;
+	int status;
 
 	if (argv[1] != NULL)
 	{
 		status = atoi(argv[1]);
+	}
+	else
+	{
+		status = last_status;
 	}
 	free(argv);
 	free(mes);
@@ -25,7 +30,6 @@ void exit_shell(char **argv, char *mes)
 void end_file(char *mes)
 {
 	{
-	
 		free(mes);
 		exit(0);
 	}

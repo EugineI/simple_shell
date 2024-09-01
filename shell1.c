@@ -35,10 +35,6 @@ void execute_command(char **argv, char **av)
 		}
 		argv[0] = com_path;
 	}
-	else
-	{
-		com_path = argv[0];
-	}
 	child_pid = fork();
 	if (child_pid == -1)
 	{
@@ -57,7 +53,11 @@ void execute_command(char **argv, char **av)
 	}
 	else
 	{
-		waitpid(child_pid, &status, 0);
+		wait(&status);
+		if (WIFEXITED(status))
+		{
+			last_status = WEXITSTATUS(status);
+		}
 	}
 	if (com_path != argv[0])
 		free(com_path);

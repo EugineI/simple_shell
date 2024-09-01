@@ -9,6 +9,7 @@
 #include<sys/stat.h>
 #include<errno.h>
 #define BUFFER_SIZE 1024
+extern int last_status;
 extern char **environ;
 char *rem_newline(char *str, ssize_t len);
 void exit_shell(char **argv, char *mes);
