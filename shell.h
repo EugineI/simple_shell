@@ -21,4 +21,5 @@ char **token_input(char *mes);
 void prompt(void);
 int built_in(char **argv, char *mes);
 char *command_path(const char *mes);
+int _cd(char **args);
 #endif

@@ -23,7 +23,7 @@ void execute_command(char **argv, char **av)
 {
 	pid_t child_pid;
 	int status;
-	char *com_path = NULL;
+	char *com_path;
 
 	if (strchr(argv[0], '/') == NULL)
 	{
@@ -31,7 +31,6 @@ void execute_command(char **argv, char **av)
 		if (com_path == NULL)
 		{
 			print_error(av[0], argv[0]);
-			last_status = 127;
 			return;
 		}
 		argv[0] = com_path;
@@ -40,7 +39,7 @@ void execute_command(char **argv, char **av)
 	if (child_pid == -1)
 	{
 		perror("fork");
-		if (com_path != NULL)
+		if (com_path != argv[0])
 			free(com_path);
 		return;
 	}
@@ -49,7 +48,7 @@ void execute_command(char **argv, char **av)
 		if (execve(argv[0], argv, (char *const *)environ) == -1)
 		{
 			print_error(av[0], argv[0]);
-			_exit(127);
+			_exit(EXIT_FAILURE);
 		}
 	}
 	else
@@ -60,7 +59,7 @@ void execute_command(char **argv, char **av)
 			last_status = WEXITSTATUS(status);
 		}
 	}
-	if (com_path != NULL)
+	if (com_path != argv[0])
 		free(com_path);
 }
 /**
@@ -80,7 +79,7 @@ char *command_path(const char *mes)
 	path = strdup(path_env);
 	if (path == NULL)
 		return (NULL);
-	dir = strtok(path, ":");
+	dir = strtok(path, " :\t\n");
 	while (dir != NULL)
 	{
 		len = strlen(dir) + strlen(mes) + 2;

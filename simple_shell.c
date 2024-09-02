@@ -39,6 +39,12 @@ int main(int ac, char **av)
 				free(argv);
 			continue;
 		}
+		if (strcmp(argv[0], "cd") == 0)
+		{
+			_cd(argv);
+			free(argv);
+			continue;
+		}
 		if (built_in(argv, mes))
 		{
 			free(argv);
