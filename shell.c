@@ -31,7 +31,7 @@ void end_file(char *mes)
 {
 	{
 		free(mes);
-		exit(0);
+		exit(127);
 	}
 }
 /**
