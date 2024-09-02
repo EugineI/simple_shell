@@ -13,7 +13,7 @@ extern int last_status;
 extern char **environ;
 char *rem_newline(char *str, ssize_t len);
 void exit_shell(char **argv, char *mes);
-void end_file(char *mes);
+void end_file(char **argv,char *mes);
 void print_error(char *pro_name, char *command);
 void shell_env(void);
 void execute_command(char **argv, char **av);
