@@ -27,20 +27,10 @@ void exit_shell(char **argv, char *mes)
  * @mes: mes
  * Return: nothing
  */
-void end_file(char **argv, char *mes)
+void end_file(char *mes)
 {
-	int status;
-	
-	if (argv[1] != NULL)
-	{
-		status = atoi(argv[1]);
-	}
-	else
-	{
-		status = last_status;
-        }
 	free(mes);
-	exit(status);
+	exit(0);
 }
 /**
  * print_error - name
