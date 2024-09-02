@@ -27,7 +27,7 @@ void exit_shell(char **argv, char *mes)
  * @mes: mes
  * Return: nothing
  */
-void end_file(char *mes)
+void end_file(char **argv, char *mes)
 {
 	int status;
 	
@@ -40,7 +40,7 @@ void end_file(char *mes)
 		status = last_status;
         }
 	free(mes);
-	exit(127);
+	exit(status);
 }
 /**
  * print_error - name

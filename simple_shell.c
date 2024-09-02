@@ -21,7 +21,7 @@ int main(int ac, char **av)
 		{
 			if (feof(stdin))
 			{
-				end_file(mes);
+				end_file(argv, mes);
 			} else
 			{
 				perror("getline");
