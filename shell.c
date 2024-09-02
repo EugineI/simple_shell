@@ -29,10 +29,18 @@ void exit_shell(char **argv, char *mes)
  */
 void end_file(char *mes)
 {
+	int status;
+	
+	if (argv[1] != NULL)
 	{
-		free(mes);
-		exit(127);
+		status = atoi(argv[1]);
 	}
+	else
+	{
+		status = last_status;
+        }
+	free(mes);
+	exit(127);
 }
 /**
  * print_error - name
