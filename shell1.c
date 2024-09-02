@@ -60,7 +60,7 @@ void execute_command(char **argv, char **av)
 			last_status = WEXITSTATUS(status);
 		}
 	}
-	if (com_path != NULL && com_path != argv[0])
+	if (com_path != NULL)
 		free(com_path);
 }
 /**
@@ -80,7 +80,7 @@ char *command_path(const char *mes)
 	path = strdup(path_env);
 	if (path == NULL)
 		return (NULL);
-	dir = strtok(path, " :\t\n");
+	dir = strtok(path, ":");
 	while (dir != NULL)
 	{
 		len = strlen(dir) + strlen(mes) + 2;
