@@ -30,8 +30,8 @@ void execute_command(char **argv, char **av)
 		com_path = command_path(argv[0]);
 		if (com_path == NULL)
 		{
-
 			print_error(av[0], argv[0]);
+			last_status = 127;
 			return;
 		}
 		argv[0] = com_path;
