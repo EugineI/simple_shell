@@ -36,12 +36,14 @@ int _cd(char **args)
 	}
 	if (chdir(dir) != 0)
 	{
+		fprintf(stderr, "cd: can't cd to %s\n", dir);
 		return(1);
 	}
 	if (getcwd(cwd, sizeof(cwd)) != NULL)
 		setenv("PWD", cwd, 1);
 	else
 	{
+		perror("getcwd");
 		return (1);
 	}
 	return 0;
