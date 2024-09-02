@@ -23,7 +23,7 @@ void execute_command(char **argv, char **av)
 {
 	pid_t child_pid;
 	int status;
-	char *com_path;
+	char *com_path = NULL;
 
 	if (strchr(argv[0], '/') == NULL)
 	{
@@ -60,7 +60,7 @@ void execute_command(char **argv, char **av)
 			last_status = WEXITSTATUS(status);
 		}
 	}
-	if (com_path != NULL)
+	if (com_path != NULL && com_path != argv[0])
 		free(com_path);
 }
 /**
