@@ -59,7 +59,7 @@ void execute_command(char **argv, char **av)
 			last_status = WEXITSTATUS(status);
 		}
 	}
-	if (com_path != NULL && com_path != argv[0])
+	if (com_path != NULL)
 		free(com_path);
 }
 /**
